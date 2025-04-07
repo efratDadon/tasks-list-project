@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Clean the room",
+    "description": "Tidy up and clean the entire room."
+  },
+  {
+    "id": 2,
+    "name": "Buy groceries",
+    "description": "Go to the store and buy missing groceries like milk and bread."
+  },
+  {
+    "id": 3,
+    "name": "Send an email",
+    "description": "Send an email with the updates."
+  },
+  {
+    "id": 4,
+    "name": "Organize files",
+    "description": "Sort and organize the files on the computer."
+  }
+]

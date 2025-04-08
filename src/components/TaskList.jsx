@@ -1,13 +1,15 @@
-
 import React, { useEffect, useState } from 'react';
 import { getTasks, deleteTask, updateTask } from '../api/taskApi';
 import TaskItem from './TaskItem';
 import TaskForm from './TaskForm';
+import { Button } from '@mui/material'; 
 
 export const TaskList = () => {
+  const [showTasks, setShowTasks] = useState(false); 
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showTaskForm, setShowTaskForm] = useState(false); 
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -42,23 +44,55 @@ export const TaskList = () => {
     }
   };
 
+  const handleShowTasks = () => {
+    setShowTasks(true); 
+  };
+
+  const handleHideTasks = () => {
+    setShowTasks(false); 
+  };
+
+  const handleShowTaskForm = () => {
+    setShowTaskForm(true); 
+  };
+
+  const handleHideTaskForm = () => {
+    setShowTaskForm(false); 
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <div>
-      <h1>Task List</h1>
-      <TaskForm setTasks={setTasks} />
-      <ul>
-        {tasks.map((task) => (
-          <TaskItem 
-            key={task.id} 
-            task={task} 
-            onDelete={handleDelete} 
-            onUpdate={handleUpdate} 
-          />
-        ))}
-      </ul>
+      {!showTasks && (
+        <Button className="button" onClick={handleShowTasks}>רשימת המשימות שלי</Button>
+      )}
+      {showTasks && (
+        <>
+          <h1>Task List</h1>
+          <ul>
+            {tasks.map((task) => (
+              <TaskItem
+                key={task.id}
+                task={task}
+                onDelete={handleDelete}
+                onUpdate={handleUpdate}
+              />
+            ))}
+          </ul>
+          <Button className="button" onClick={handleHideTasks}>להסתרת רשימת המשימות</Button>
+        </>
+      )}
+      {!showTaskForm && (
+        <Button className="button" onClick={handleShowTaskForm}>הוספת משימה חדשה</Button>
+      )}
+      {showTaskForm && (
+        <>
+          <TaskForm setTasks={setTasks} />
+          <Button onClick={handleHideTaskForm}>ביטול</Button>
+        </>
+      )}
     </div>
   );
 };

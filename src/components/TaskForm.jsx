@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { addTask } from '../api/taskApi';
 import { Button, TextField } from '@mui/material';
 
 export const TaskForm = ({ setTasks }) => {
   const [task, setTask] = useState({ name: '', description: '' });
+  const [showForm, setShowForm] = useState(true); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,29 +17,35 @@ export const TaskForm = ({ setTasks }) => {
       const newTask = await addTask(task);
       setTasks((prevTasks) => [...prevTasks, newTask]);
       setTask({ name: '', description: '' });
+      setShowForm(false);  
     } catch (error) {
       alert('Failed to add task');
     }
   };
 
+
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label="Task Name"
-        name="name"
-        value={task.name}
-        onChange={handleInputChange}
-        required
-      />
-      <TextField
-        label="Description"
-        name="description"
-        value={task.description}
-        onChange={handleInputChange}
-        required
-      />
-      <Button type="submit">Add Task</Button>
-    </form>
+    <>
+      {showForm && (  // מציג את הטופס רק אם showForm == true
+        <form onSubmit={handleSubmit}>
+          <TextField
+            label="Task Name"
+            name="name"
+            value={task.name}
+            onChange={handleInputChange}
+            required
+          />
+          <TextField
+            label="Description"
+            name="description"
+            value={task.description}
+            onChange={handleInputChange}
+            required
+          />
+          <Button type="submit">Add Task</Button>
+        </form>
+      )}
+    </>
   );
 };
 

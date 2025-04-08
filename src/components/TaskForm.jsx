@@ -26,7 +26,7 @@ export const TaskForm = ({ setTasks }) => {
 
   return (
     <>
-      {showForm && (  // מציג את הטופס רק אם showForm == true
+      {showForm && ( 
         <form onSubmit={handleSubmit}>
           <TextField
             label="Task Name"

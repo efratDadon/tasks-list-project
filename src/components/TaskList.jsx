@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { getTasks, deleteTask, updateTask } from '../api/taskApi';
 import TaskItem from './TaskItem';
 import TaskForm from './TaskForm';
-import { Button } from '@mui/material'; 
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export const TaskList = () => {
-  const [showTasks, setShowTasks] = useState(false); 
+  const [showTasks, setShowTasks] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showTaskForm, setShowTaskForm] = useState(false); 
+  const [showTaskForm, setShowTaskForm] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -45,23 +47,35 @@ export const TaskList = () => {
   };
 
   const handleShowTasks = () => {
-    setShowTasks(true); 
+    setShowTasks(true);
   };
 
   const handleHideTasks = () => {
-    setShowTasks(false); 
+    setShowTasks(false);
   };
 
   const handleShowTaskForm = () => {
-    setShowTaskForm(true); 
+    setShowTaskForm(true);
   };
 
   const handleHideTaskForm = () => {
-    setShowTaskForm(false); 
+    setShowTaskForm(false);
+  };
+
+  const handleLoginRedirect = () => {
+    navigate('/');
   };
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) return (
+    <div>
+      <div>{error}</div>
+      <Button onClick={handleLoginRedirect} className="button">
+        עליך להתחבר כדי להציג את המשימות
+      </Button>
+
+    </div>
+  );
 
   return (
     <div>
@@ -90,7 +104,7 @@ export const TaskList = () => {
       {showTaskForm && (
         <>
           <TaskForm setTasks={setTasks} />
-          <Button onClick={handleHideTaskForm}>ביטול</Button>
+          <Button onClick={handleHideTaskForm}>חזור</Button>
         </>
       )}
     </div>

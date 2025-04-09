@@ -1,10 +1,13 @@
-
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
+import './TaskItem.css'; 
 
 export const TaskItem = ({ task, onDelete, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [updatedTask, setUpdatedTask] = useState({ name: task.name, description: task.description });
+  const [updatedTask, setUpdatedTask] = useState({
+    name: task.name,
+    description: task.description,
+  });
 
   const handleUpdate = () => {
     onUpdate(task.id, updatedTask);
@@ -12,18 +15,22 @@ export const TaskItem = ({ task, onDelete, onUpdate }) => {
   };
 
   return (
-    <li>
+    <li className="task-item">
       {isEditing ? (
         <div>
           <input
             type="text"
             value={updatedTask.name}
-            onChange={(e) => setUpdatedTask({ ...updatedTask, name: e.target.value })}
+            onChange={(e) =>
+              setUpdatedTask({ ...updatedTask, name: e.target.value })
+            }
           />
           <input
             type="text"
             value={updatedTask.description}
-            onChange={(e) => setUpdatedTask({ ...updatedTask, description: e.target.value })}
+            onChange={(e) =>
+              setUpdatedTask({ ...updatedTask, description: e.target.value })
+            }
           />
           <Button onClick={handleUpdate}>Save</Button>
         </div>

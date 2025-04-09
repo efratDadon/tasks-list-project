@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [token, setToken] = useState(sessionStorage.getItem('token') || null);
   const [user, setUser] = useState(null); 
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const { token } = await loginUser(username, password);
       setToken(token);
-      localStorage.setItem('token', token);
+      sessionStorage.setItem('token', token);
     } catch (error) {
       console.error('Login failed', error);
       throw new Error('Invalid credentials');

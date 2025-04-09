@@ -4,7 +4,7 @@ import { Button, TextField } from '@mui/material';
 
 export const TaskForm = ({ setTasks }) => {
   const [task, setTask] = useState({ name: '', description: '' });
-  const [showForm, setShowForm] = useState(true); 
+  const [showForm, setShowForm] = useState(true);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -17,7 +17,7 @@ export const TaskForm = ({ setTasks }) => {
       const newTask = await addTask(task);
       setTasks((prevTasks) => [...prevTasks, newTask]);
       setTask({ name: '', description: '' });
-      setShowForm(false);  
+      setShowForm(false);
     } catch (error) {
       alert('Failed to add task');
     }
@@ -26,7 +26,7 @@ export const TaskForm = ({ setTasks }) => {
 
   return (
     <>
-      {showForm && ( 
+      {showForm && (
         <form onSubmit={handleSubmit}>
           <TextField
             label="Task Name"

@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# TasksList Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+This project is a Task Management System built with React for the frontend and js and Swagger API for the backend. The system allows users to manage tasks, including viewing, updating, adding, and deleting tasks. The system also includes a user authentication feature where users must log in before accessing the task management features. The user data is stored in a local JSON file, and the backend supports common HTTP methods such as GET, POST, PUT, and DELETE.
 
-## Available Scripts
+## Frontend 
+TaskList: Displays a list of tasks fetched from the API.
+TaskItem: Displays each individual task.
+TaskForm: Used for adding new tasks.
+LoginForm: Allows users to log in with their username and password.
+useAuth: A custom hook to manage authentication logic and context.
 
-In the project directory, you can run:
+## Backend
+Authentication - using Middleware
+## API Endpoints
+# Tasks
+GET /tasks: Fetches all tasks.
+POST /tasks: Adds a new task.
+PUT /tasks/:id: Updates an existing task.
+DELETE /tasks/:id: Deletes a task.
+# Authentication
+POST /auth/login: Logs in an existing user.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
+- React: For building the user interface.
+- Swagger: For API documentation and backend.
+- Material-UI: For frontend styling.
+- JSON: For storing task and user data.
+- Axios: For making API requests to the backend.
+- JWT: For user authentication.
+- dotenv for environment variables
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Features
+ - User Authentication- Implementing additional capabilities I added:
+Users need to log in before they can access the task management system.
+Login credentials are checked against the data stored in a local JSON file.
+JWT is used for authenticating users and protecting API routes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Task Management
+Users can view all tasks.
+Users can add new tasks.
+Users can edit or delete existing tasks.
 
-### `npm run build`
+- Responsive Design
+The system is designed to be mobile-friendly and responsive using Material-UI.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- API Endpoints
+GET /tasks: Fetch all tasks.
+POST /tasks: Add a new task.
+PUT /tasks/:id: Update a task.
+DELETE /tasks/:id: Delete a task.
+POST /auth/login: Log in with username and password.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Prepare
+1. Clone the repository:
+git clone https://github.com/efratDadon/tasks-list-project
+2. Install dependencies using `npm install`
+3. Navigate to the server folder and install dependencies:
+cd server
+npm install
+4. Run the backend server `node app.js`
+5. Run the client side `npm start`
+`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Instructions to access the Swagger UI:
+1. Navigate to the following URL in your browser: http://localhost:3000/api-docs/
+2. Login to Get JWT Token
+Before performing actions on tasks (GET, POST, PUT, DELETE), you need to log in and obtain a JWT Token
+- Step 1: Send a POST request to /post/user with your username and password to receive the token.
+The user should be one of the users stored in the jspn files, for example: 
+{
+  "username": "yael",
+  "password": "password123"
+}
+3. In Swagger UI, you need to authorize the token to be able to make API calls.
+Step 1: Click on the Authorize button 
+Step 2: In the pop-up window, enter the token you received in the previous step in the "Value" field as follows:  Bearer your_jwt_token
+Step 3: Click Authorize.
+4. Make API reqests
+After successfully logging in and authorizing, you can now perform API calls on the tasks
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
